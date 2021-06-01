@@ -1,0 +1,11 @@
+[[redirects]]
+    from    = "/auth/confirm-account/*"
+    to      = "/auth/confirm-account/[token].html"
+    status  = 200
+    force   = true
+
+[[redirects]]
+    from    = "/auth/reset-password/*"
+    to      = "/auth/reset-password/[token].html"
+    status  = 200
+    force   = true

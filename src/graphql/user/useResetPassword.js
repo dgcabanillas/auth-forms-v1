@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { RESET_PASSWORD }   from 'src/graphql/user';
 import { useMutation }      from '@apollo/client';
 import { formatError }      from 'src/util/helpers';
