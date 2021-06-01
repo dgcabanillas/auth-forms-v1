@@ -1,3 +1,7 @@
+[build]
+    comand  = "npm run build && npm run export"
+    publish = "out"
+
 [[redirects]]
     from    = "/auth/confirm-account/*"
     to      = "/auth/confirm-account/[token].html"
