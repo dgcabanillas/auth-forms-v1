@@ -16,5 +16,6 @@ const config = process.env.NODE_ENV === 'development' ? devConfig : prodConfig;
 
 module.exports = {
     ...config,
+    target: 'serverless',
     distDir: 'out'
 }
