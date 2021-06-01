@@ -1,0 +1,1 @@
+export const SET_TARGET_PATH = 'SET_TARGET_PATH';

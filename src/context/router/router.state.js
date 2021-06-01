@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { useRouter } from 'next/router';
 import RouterContext from './router.context';
+import RouterReducer from './router.reducer';
+
+import { SET_TARGET_PATH } from './router.types';
 
 const RouterState = ( props ) => {
     const router = useRouter();
+
+    const initialState = {
+        targetPath: '/',
+    };
 
     /*
         HOME:                       () => '/',
@@ -22,20 +29,28 @@ const RouterState = ( props ) => {
         VALIDAR_VOUCHERS:           ()   => '/vouchers/validate',
     */
 
+    const [state, dispatch] = useReducer( RouterReducer, initialState );
+
+    const setTargetPath = (path) => { dispatch({type: SET_TARGET_PATH, payload: path}) }
+
     const gotoHome      = ()    => { router.push('/') } 
     const gotoLogin     = ()    => { router.push('/auth/login') }
     const gotoRecover   = ()    => { router.push('/auth/recover') } 
     const gotoRegister  = ()    => { router.push('/auth/register') }
     const gotoProfile   = (id)  => { router.push(`/user/information/${id}`) }
+    const gotoTargetPath = ()   => { router.push(state.targetPath) }
 
     return (
         <RouterContext.Provider
             value={{
+                targetPath: state.targetPath,
+                setTargetPath,
                 gotoHome,
                 gotoLogin,
                 gotoRecover,
                 gotoRegister,
                 gotoProfile,
+                gotoTargetPath,
             }}
         >
             { props.children }    

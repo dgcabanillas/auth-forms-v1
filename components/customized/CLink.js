@@ -1,30 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withStyles } from '@material-ui/core';
-import clsx from 'clsx';
 
 const styles = (theme) => ({
     root: {
-        margin: '8px auto 4px',
+        margin: '6px auto 3px',
         fontSize: 12,
         fontWeight: 500,
-        color: theme.palette.text.secondary,
+        color: theme.palette.primary.dark,
     }
 });
 
 const CLink = ( props ) => {
 
-    const { classes, className, text, ...other } = props;
+    const { text, ...other } = props;
 
     return (
         <Link
-            component   = "button"
-            variant     = "body2"
-            className   = {clsx(classes.root, className)}
             { ...other }
-        >
-            { text }
-        </Link>
+            variant = "body2"
+            component = "button"
+        > { text } </Link>
     )
 }
 

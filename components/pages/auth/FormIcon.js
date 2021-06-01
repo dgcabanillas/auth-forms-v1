@@ -24,8 +24,8 @@ const useStyles = makeStyles( theme => ({
         border: `2px solid ${theme.palette.primary.dark}`,
         borderRadius: '50%',
         '& > div': {
-            width: '90%',
-            height: '90%',
+            width: '80%',
+            height: '80%',
             backgroundColor: theme.palette.primary.dark,
             mask: `url(${ path }) no-repeat center`,
             maskSize: '80%',

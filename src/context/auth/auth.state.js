@@ -31,14 +31,14 @@ const AuthState = props => {
 
     const [state, dispatch] = useReducer( AuthReducer, initialState );
 
-    const login = (userData) => {
-        localStorage.setItem('jwtToken', userData.token);
+    const login = (token) => {
+        localStorage.setItem('jwtToken', token);
         dispatch({
             type: LOGIN,
-            payload: jwtDecode(userData.token)
+            payload: jwtDecode(token)
         });
     }
-    
+
     const logout = () => {
         localStorage.removeItem('jwtToken');
         dispatch({ type: LOGOUT });

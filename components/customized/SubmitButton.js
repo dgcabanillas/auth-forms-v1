@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 
 const SubmitButton = ( props ) => {
+
+    const { text, ...other } = props;
+
     return (
         <Button 
+            { ...other }
+            fullWidth
+            size='large'
+            type='submit'
             color='primary' 
             variant='contained'
-            type='submit'
-            size='large'
-            fullWidth
             style={{ marginTop: 16 }}
-            { ...props }
-        > { props.text } </Button>
+        > { text } </Button>
     )
 }
 

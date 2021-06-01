@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import MainLayout       from 'components/layout/MainLayout';
 import CTextField       from 'components/customized/CTextField';
@@ -9,19 +10,28 @@ import CDivider         from 'components/customized/CDivider';
 import CLink            from 'components/customized/CLink';
 import FormIcon         from 'components/pages/auth/FormIcon';
 import RouterContext    from 'src/context/router/router.context';
+import AuthContext      from 'src/context/auth/auth.context';
+import { useRecover }   from 'src/graphql/user/useRecover';
 
 const Recover = () => {
 
+    const { user } = useContext(AuthContext);
     const { gotoHome, gotoLogin, gotoRegister } = useContext(RouterContext);
+    const [recover, { data: success, loading }] = useRecover();
 
     const formik = useFormik({
         initialValues: {
-            usuario:    '',
+            email: ''
         },
-        onSubmit: (data) => {
-            console.log( data );
-        }
+        validationSchema: Yup.object({
+            email: Yup.string()
+                    .email('Ingrese un correo válido.')
+                    .required('El correo no puede ser vacío'),
+        }),
+        onSubmit: ( args ) => { recover({ variables: args }); }
     })
+
+    useEffect(() => { if( user ) gotoHome() }, [user])
 
     return (
         <FormContainer width={400}>
@@ -29,11 +39,14 @@ const Recover = () => {
             <FormTitle text='recuperar cuenta'/>
             <form onSubmit={formik.handleSubmit}>
                 <CTextField 
-                    name='usuario'
+                    name='email'
                     label="Correo electrónico"
                     onChange={formik.handleChange}
+                    value={formik.values.email}
+                    errorText={formik.errors.email}
+                    disabled={success}
                 />
-                <SubmitButton text='enviar'/>
+                <SubmitButton text='enviar' disabled={loading || success}/>
             </form>
             <CDivider height={12}/>
             <CLink 
@@ -42,7 +55,7 @@ const Recover = () => {
             />
             <CLink 
                 onClick={gotoLogin}
-                text='Regresar al panel de ingreso'
+                text='Ir al panel de ingreso'
             />
             <CLink 
                 onClick={gotoRegister}

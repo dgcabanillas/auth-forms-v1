@@ -1,29 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Typography } from '@material-ui/core';
-import clsx from 'clsx';
+import { withStyles, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const styles = (theme) => ({
     root: {
         fontSize: 28,
         fontWeight: 700,
         marginTop: 12,
         color: theme.palette.primary.dark,
     }
-}))
+});
 
 const FormTitle = ( props ) => {
-    const classes = useStyles();
+
+    const { text, ...other } = props;
 
     return (
         <Typography 
-            component='h1' 
-            variant='subtitle1' 
+            { ...other }
             align='center'
-            { ...props }
-            className={clsx(props.className, classes.root)}
+            component='h1' 
+            variant='subtitle1'
         >
-            { props.text.toUpperCase() }
+            { text.toUpperCase() }
         </Typography>
     )
 }
@@ -36,4 +35,4 @@ FormTitle.propTypes = {
     text: PropTypes.string,
 }
 
-export default FormTitle
+export default withStyles(styles)(FormTitle);

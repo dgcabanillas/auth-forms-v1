@@ -20,13 +20,6 @@ const useStyles = makeStyles( theme => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-    dev: {
-        position: 'absolute',
-        bottom: 20,
-        color: theme.palette.text.primary,
-        fontSize: 14,
-    }
 }));
 
 const MainLayout = ( props ) => {
@@ -36,10 +29,6 @@ const MainLayout = ( props ) => {
         <main className={classes.main}>
             <div className={classes.overlay}>
                 { props.children }
-                <div className={classes.dev}>
-                    Desarrollado por 
-                    <a href='https://diegocabanillas.com'> Diego Cabanillas </a>
-                </div>
             </div>
         </main>
     )
